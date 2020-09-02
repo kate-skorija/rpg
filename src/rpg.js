@@ -20,7 +20,7 @@ const changeState = (prop) => {
   return (value) => {
     return (state) => {
       if (state[prop] + value <= 10) {
-        return{
+        return {
         ...state,
         [prop]: (state[prop] || 0) + value
         } 
@@ -45,11 +45,33 @@ const changeTwoStateProps = (prop) => {
   return (prop2) => {
     return (value) => {
       return (value2) => {
-        return (state) => ({
-          ...state,
-          [prop] : (state[prop] || 0) + value,
-          [prop2] : (state[prop2] || 0) + value2
-        }) 
+        return (state) => {
+          if((state[prop] + value <= 10) && (state[prop2] + value2 <=10)) {
+            return{
+              ...state,
+              [prop] : (state[prop] || 0) + value,
+              [prop2] : (state[prop2] || 0) + value2
+            }  
+          }else if ((state[prop] + value <= 10) && (state[prop2] + value2 >10)) {
+            return{
+              ...state,
+              [prop] : (state[prop] || 0) + value,
+              [prop2] : (state[prop2]) = 10
+            }
+          }else if ((state[prop] + value > 10) && (state[prop2] + value2 >10)) {
+            return{
+              ...state,
+              [prop] : (state[prop]) = 10,
+              [prop2] : (state[prop2]) = 10
+            }
+          }else if ((state[prop] + value > 10) && (state[prop2] + value2 <=10)) {
+            return{
+              ...state,
+              [prop] : (state[prop]) = 10,
+              [prop2] : (state[prop2]|| 0) + value
+            }
+          }  
+        }
       }
     }
   }
@@ -60,8 +82,8 @@ const changeWisdom = changeState("wisdom");
 const changeStrength = changeState("strength");
 const changeCreativity = changeState("creativity");
 const changeMoney = changeState("money");
-const wine = changeTwoStateProps("wisdom")("creativity")(-1)(1);
+const wine = changeTwoStateProps("wisdom")("health")(-1)(1);
   
 const pizza = changeWisdom(5);
-console.log(knight(pizza));
-console.log(knight(pizza));
+console.log(knight(wine));
+//console.log(knight(pizza));
