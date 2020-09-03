@@ -1,27 +1,22 @@
-# [Program Title]
+# Renaissance RPG - Backend
  
   ### By Beverly Potts, Kate Skorija, & Taylor Somers
  
 ## Description
   
-  [Description of program functionality & intent presented as an elevator pitch.]
+  This is an unfinished project using funcitonal programming with JavaScript to build out a rpg game with a Renaissance theme. 
  
 ## Languages & Technologies Used:
  
   ### Programming Languages & Libraries
-  * Bootstrap
-  * CSS
-  * HTML
   * JavaScript
-  * jQuery
   * Node
   * WebPack
+  * Jest
  
   ### Operating Systems & Programs
-  * Brave
   * Git Bash
   * Google Chrome
-  * Microsoft Windows 10
   * Visual Studio Code
  
 ## Installation
@@ -37,22 +32,13 @@
   9.  Enter the command "$ npm run build" in the terminal and press "Enter".
   10. Enter the command "$ npm run start" in the terminal and press "Enter".
   11. The program should open and run with its user interface accessible in your default web browser.
- 
-## Specifications
- 
-  | Program Behavior | Example Behavior | Example Output |
-  | ----------- | ----------- | ----------- |
-  |  |  |  |
-  
- 
-## Known Bugs
- 
-  * No known bugs at this time. If any are discovered, please feel free to reach out and let me know. If you would like to contribute any fixes or improvements, please do!
+
  
 ### Contributors
  
   * Taylor Somers
-  * [Other Contributor(s): Anyone who contributed at least %5 of the total product.]
+  * Kate Skorija
+  * Beverly Potts
  
 ### License
  
