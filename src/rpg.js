@@ -8,14 +8,7 @@ const storeState = (initialState) => {
     return newState;
   }
 }
-
-// Characters
-
-const painter = storeState( {level: 1, experience: 10, health:10, wisdom:7, strength:5, creativity:9, money:2} );
-const knight = storeState( {level: 1, experience: 2, health:10, wisdom:4, strength:9, creativity:3, money:9} );
-const alchemist = storeState( {level: 1, experience: 1, health:10, wisdom:8, strength:4, creativity:9, money:5} );
-const inventor = storeState( {level: 1, experience: 1, health:10, wisdom:10, strength:6, creativity:9, money:3} );
-
+  
 // Monsters
 
 const automaton = storeState( {damage: 4, multiplier: 1} );
@@ -27,8 +20,8 @@ const changeState = (prop) => {
     return (state) => {
       if (state[prop] + value <= 10) {
         return {
-        ...state,
-        [prop] : (state[prop] || 0) + value
+          ...state,
+          [prop] : (state[prop] || 0) + value
         } 
       } else {
         return {
@@ -76,6 +69,7 @@ const changeTwoStateProps = (prop) => {
   }
 }
 
+// This function is called immediately after the battle function
 const levelUp = (playerState) => {
   if (playerState.experience >= 10) {
     return {
@@ -90,6 +84,7 @@ const levelUp = (playerState) => {
   }
 }
 
+
 const monsterBattle = (monsterState) => {
   return (playerProp) => {
     return (playerState) => {
@@ -98,8 +93,8 @@ const monsterBattle = (monsterState) => {
           ...playerState,
           experience: (playerState.experience) + monsterState.multiplier, 
           [playerProp]: (playerState[playerProp]) + 1
-          }
-        } else {
+        }
+      } else {
         return {
           ...playerState,
           health: (playerState.health) - (monsterState.multiplier * playerState.level)
@@ -108,6 +103,19 @@ const monsterBattle = (monsterState) => {
     }
   }
 }
+
+const inventoryEquip = (inventoryItem) => {
+  return (playerState) => {
+    console.log(playerState)
+    if (playerState.inventory.includes(inventoryItem())) {
+      playerState(inventoryItem)
+      return {
+        ...playerState
+      }
+    }
+  }
+}
+
 
 
 // Functions built with factories
@@ -118,6 +126,19 @@ const changeWisdom = changeState("wisdom");
 const changeStrength = changeState("strength");
 const changeCreativity = changeState("creativity");
 const changeMoney = changeState("money");
+
+// Inventory Items
+const paintbrush = changeCreativity(2);
+const sword = changeStrength(2);
+const mortarPestle = changeWisdom(2);
+const crazyHair = changeCreativity(2);
+
+// Characters
+const painter = storeState( {level: 1, experience: 10, health:10, wisdom:7, strength:5, creativity:9, money:2, inventory: [paintbrush]} );
+const knight = storeState( {level: 1, experience: 2, health:10, wisdom:4, strength:9, creativity:3, money:9, inventory: [sword]} );
+const alchemist = storeState( {level: 1, experience: 1, health:10, wisdom:8, strength:4, creativity:9, money:5, inventory: [mortarPestle]} );
+const inventor = storeState( {level: 1, experience: 1, health:10, wisdom:10, strength:6, creativity:9, money:3, inventory: [crazyHair]} );
+
 
 // Health
 const elixir = changeHealth(1);
@@ -139,7 +160,9 @@ const automatonBattle = monsterBattle(automaton())("creativity");
 
 // const newAutomatonBattle = automatonBattle(painter());
 // console.log(newAutomatonBattle);
-const painterLevelUp = levelUp(painter());
-console.log(painterLevelUp);
+//const painterLevelUp = levelUp(painter());
+//console.log(painterLevelUp);
 // console.log(knight(wine));
 //console.log(knight(pizza));
+const painterWithBrush = inventoryEquip(paintbrush)(painter());
+console.log(painterWithBrush());
